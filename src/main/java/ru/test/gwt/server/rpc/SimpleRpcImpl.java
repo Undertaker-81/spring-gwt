@@ -1,9 +1,9 @@
-package ru.fil.gwt.server.rpc;
+package ru.test.gwt.server.rpc;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.springframework.stereotype.Component;
-import ru.fil.gwt.server.service.HelloService;
-import ru.fil.gwt.shared.rpc.SimpleRpc;
+import ru.test.gwt.server.service.HelloService;
+import ru.test.gwt.shared.rpc.SimpleRpc;
 
 @SuppressWarnings("GwtServiceNotRegistered")
 @Component

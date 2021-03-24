@@ -6,7 +6,7 @@
     <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
     <set-property name="restygwt.encodeDecode.useGwtJackson" value="true"/>
 
-    <entry-point class='ru.fil.gwt.client.Application'/>
+    <entry-point class='ru.test.gwt.client.Application'/>
 
     <source path='client'/>
     <source path='shared'/>

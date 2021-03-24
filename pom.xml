@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.fil.gwt</groupId>
+    <groupId>ru.test.gwt</groupId>
     <artifactId>spring-gwt</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -17,6 +17,9 @@
         <version.gwt-sl>1.7</version.gwt-sl>
         <version.restygwt>2.2.7</version.restygwt>
         <version.jaxrs>3.0.12.Final</version.jaxrs>
+        <postgresql.version>42.2.17</postgresql.version>
+        <spring-data-jpa.version>2.4.0</spring-data-jpa.version>
+        <hibernate.version>5.4.22.Final</hibernate.version>
     </properties>
 
     <repositories>
@@ -72,6 +75,21 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
     </dependencies>
 

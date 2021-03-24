@@ -1,4 +1,4 @@
-package ru.fil.gwt.shared.dto;
+package ru.test.gwt.shared.dto;
 
 public class StringDto {
 

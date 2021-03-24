@@ -1,4 +1,4 @@
-package ru.fil.gwt.server.config;
+package ru.test.gwt.server.config;
 
 import org.gwtwidgets.server.spring.GWTHandler;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import ru.fil.gwt.shared.rpc.SimpleRpc;
+import ru.test.gwt.shared.rpc.SimpleRpc;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
@@ -20,8 +20,8 @@ import java.util.HashMap;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-        "ru.fil.gwt.server.rest",
-        "ru.fil.gwt.server.rpc"
+        "ru.test.gwt.server.rest",
+        "ru.test.gwt.server.rpc"
 })
 public class WebConfig extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 

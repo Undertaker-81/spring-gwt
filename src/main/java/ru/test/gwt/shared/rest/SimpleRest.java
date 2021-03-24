@@ -1,7 +1,7 @@
-package ru.fil.gwt.shared.rest;
+package ru.test.gwt.shared.rest;
 
 import org.fusesource.restygwt.client.DirectRestService;
-import ru.fil.gwt.shared.dto.StringDto;
+import ru.test.gwt.shared.dto.StringDto;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

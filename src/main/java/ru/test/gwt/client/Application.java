@@ -1,4 +1,4 @@
-package ru.fil.gwt.client;
+package ru.test.gwt.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -17,10 +17,10 @@ import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.REST;
-import ru.fil.gwt.shared.dto.StringDto;
-import ru.fil.gwt.shared.rest.SimpleRest;
-import ru.fil.gwt.shared.rpc.SimpleRpc;
-import ru.fil.gwt.shared.rpc.SimpleRpcAsync;
+import ru.test.gwt.shared.dto.StringDto;
+import ru.test.gwt.shared.rest.SimpleRest;
+import ru.test.gwt.shared.rpc.SimpleRpc;
+import ru.test.gwt.shared.rpc.SimpleRpcAsync;
 
 import static com.google.gwt.user.client.ui.HasHorizontalAlignment.ALIGN_CENTER;
 import static com.google.gwt.user.client.ui.HasVerticalAlignment.ALIGN_MIDDLE;

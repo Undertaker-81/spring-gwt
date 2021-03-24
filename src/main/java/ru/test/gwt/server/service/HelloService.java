@@ -1,7 +1,7 @@
-package ru.fil.gwt.server.service;
+package ru.test.gwt.server.service;
 
 import org.springframework.stereotype.Service;
-import ru.fil.gwt.shared.dto.StringDto;
+import ru.test.gwt.shared.dto.StringDto;
 
 @Service
 public class HelloService {
