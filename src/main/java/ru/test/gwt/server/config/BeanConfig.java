@@ -5,6 +5,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -12,9 +14,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
+
+
 
 @Configuration
 @ComponentScan(basePackages = {
@@ -23,11 +28,12 @@ import java.util.Properties;
 })
 @EnableTransactionManagement
 public class BeanConfig {
+/*
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.space.model");
+        em.setPackagesToScan("ru.test.gwt.server.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -35,6 +41,8 @@ public class BeanConfig {
 
         return em;
     }
+
+ */
 
     @Bean
     public DataSource dataSource() {
@@ -46,6 +54,8 @@ public class BeanConfig {
         return dataSource;
     }
 
+
+/*
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -54,10 +64,22 @@ public class BeanConfig {
         return transactionManager;
     }
 
+ */
+    @Bean
+    public HibernateTransactionManager transactionManager() {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory().getObject());
+        return transactionManager;
+    }
+
+
+/*
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
+
+ */
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
@@ -65,4 +87,15 @@ public class BeanConfig {
 
         return properties;
     }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource());
+        sessionFactoryBean.setPackagesToScan("ru.test.gwt.server.model");
+        sessionFactoryBean.setHibernateProperties(additionalProperties());
+        return sessionFactoryBean;
+    }
+
+
 }
