@@ -8,7 +8,8 @@ import ru.test.gwt.shared.dto.StringDto;
 @Service
 public class HelloService {
 
-
+@Autowired
+private PersonRepository personRepository;
 
     public StringDto sayHello(StringDto targetName) {
         String name = targetName == null ? null : targetName.getValue();

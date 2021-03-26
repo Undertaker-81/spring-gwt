@@ -7,5 +7,5 @@ import ru.test.gwt.server.model.Person;
  * @author Panfilov Dmitriy
  * 26.03.2021
  */
-public interface PersonRepository extends JpaRepository<Long, Person> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 }
