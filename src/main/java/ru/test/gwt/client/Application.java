@@ -6,13 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
@@ -43,9 +37,20 @@ public class Application implements EntryPoint {
         mainPanel.setVerticalAlignment(ALIGN_MIDDLE);
         RootPanel.get().add(mainPanel);
 
+        FlexTable flexTable = createFlexTable();
         final FlowPanel centerPanel = new FlowPanel();
         mainPanel.add(centerPanel);
-
+        centerPanel.add(flexTable);
+    }
+    private FlexTable createFlexTable() {
+        FlexTable flexTable = new FlexTable();
+        flexTable.setBorderWidth(1);
+        flexTable.setText(0, 0, "This is an example of flextable");
+        flexTable.setText(2, 2, "This is also an example of flextable");
+        flexTable.getFlexCellFormatter().setColSpan(1, 0, 3);
+        return flexTable;
+    }
+/*
         centerPanel.add(new Label("Say hello to:"));
         inputField = new TextBox();
         centerPanel.add(inputField);
@@ -96,5 +101,7 @@ public class Application implements EntryPoint {
             }
         }).call(rest).sayHello(new StringDto(inputField.getText()));
     }
+
+ */
 
 }

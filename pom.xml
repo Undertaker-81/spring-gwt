@@ -21,6 +21,7 @@
         <version.restygwt>2.2.7</version.restygwt>
         <version.jaxrs>3.0.12.Final</version.jaxrs>
         <version.lombok>1.18.18</version.lombok>
+
     </properties>
 
     <repositories>
@@ -131,6 +132,18 @@
             <version>${version.postgresql}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+     <!--   <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${version.hibernate}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-runtime</artifactId>
+                    <groupId>org.glassfish.jaxb</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency> -->
 
 
     </dependencies>
