@@ -9,7 +9,7 @@ CREATE TABLE person
 
 );
 
-insert into  person (first_name, last_name, middle_name)
+insert into  person (last_name, first_name, middle_name)
             values ('Авдеев', 'Александр', 'Александрович'),
                     ('Адучиев', 'Батор' ,'Канурович'),
                    ('Азимов', 'Рахим', 'Азизбоевич'),

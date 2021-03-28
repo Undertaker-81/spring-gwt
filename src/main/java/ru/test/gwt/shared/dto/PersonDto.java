@@ -1,13 +1,20 @@
 package ru.test.gwt.shared.dto;
 
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 
 public class PersonDto {
+
+    private  int id;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String middleName;
+
     public PersonDto(){}
 
     public PersonDto(String firstName, String lastName, String middleName) {
@@ -23,13 +30,6 @@ public class PersonDto {
         this.middleName = middleName;
     }
 
-    int id;
-
-    String firstName;
-
-    String lastName;
-
-    String middleName;
 
     public String getFirstName() {
         return firstName;
@@ -68,8 +68,9 @@ public class PersonDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonDto personDto = (PersonDto) o;
-        return id == personDto.id && Objects.equals(firstName, personDto.firstName) && Objects.equals(lastName, personDto.lastName) && Objects.equals(middleName, personDto.middleName);
+        return id==personDto.id && Objects.equals(firstName, personDto.firstName) && Objects.equals(lastName, personDto.lastName) && Objects.equals(middleName, personDto.middleName);
     }
+
 
     @Override
     public int hashCode() {

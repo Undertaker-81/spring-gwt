@@ -8,6 +8,7 @@ import ru.test.gwt.server.model.Person;
 import ru.test.gwt.server.repository.PersonRepository;
 import ru.test.gwt.shared.dto.PersonDto;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,4 +33,21 @@ public class PersonService {
     public void delete(int id){
         personRepository.deleteById(id);
     }
+
+
+    public void create(PersonDto personDto){
+        log.info("write: " + personDto.toString());
+            personRepository.save(new Person( personDto.getFirstName(), personDto.getLastName(), personDto.getMiddleName()));
+    }
+
+    public void update(PersonDto personDto, int id){
+        log.info("write: " + personDto.toString());
+        Person person = new Person();
+        person.setId(personDto.getId());
+        person.setFirstName(personDto.getFirstName());
+        person.setLastName(personDto.getLastName());
+        person.setMiddleName(personDto.getMiddleName());
+        personRepository.save(person);
+    }
+
 }
