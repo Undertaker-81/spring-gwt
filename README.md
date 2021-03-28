@@ -1,4 +1,4 @@
-###T est task of Spring and GWT integration with REST backend.
+### Test task of Spring and GWT integration with REST backend.
 
 ```shell
 mvn gwt:run
