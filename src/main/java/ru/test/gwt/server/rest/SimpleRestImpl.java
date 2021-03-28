@@ -1,13 +1,9 @@
 package ru.test.gwt.server.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.test.gwt.server.model.Person;
-import ru.test.gwt.server.service.HelloService;
 import ru.test.gwt.server.service.PersonService;
 import ru.test.gwt.shared.dto.PersonDto;
-import ru.test.gwt.shared.dto.StringDto;
 import ru.test.gwt.shared.rest.SimpleRest;
 
 import java.util.List;
@@ -17,16 +13,7 @@ import java.util.List;
 public class SimpleRestImpl implements SimpleRest {
 
     @Autowired
-    private HelloService helloService;
-
-    @Autowired
     private PersonService personService;
-
-    @PostMapping("hello")
-    @Override
-    public StringDto sayHello(@RequestBody StringDto targetName) {
-        return helloService.sayHello(targetName);
-    }
 
     @Override
     @GetMapping

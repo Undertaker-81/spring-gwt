@@ -11,7 +11,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import ru.test.gwt.shared.rpc.SimpleRpc;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
@@ -20,8 +19,8 @@ import java.util.HashMap;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-        "ru.test.gwt.server.rest",
-        "ru.test.gwt.server.rpc"
+        "ru.test.gwt.server.rest"
+
 })
 public class WebConfig extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 
@@ -48,13 +47,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
     }
 
-    @Bean
-    public GWTHandler gwtHandler(SimpleRpc simpleRpc){
-        GWTHandler bean = new GWTHandler();
-        HashMap<String, Object> mapping = new HashMap<>();
-        mapping.put("/Application/rpc/simple", simpleRpc);
-        bean.setMappings(mapping);
-        return bean;
-    }
+
 
 }

@@ -31,6 +31,7 @@ public class PersonService {
     }
 
     public void delete(int id){
+        log.info("delete person with id=" + id);
         personRepository.deleteById(id);
     }
 

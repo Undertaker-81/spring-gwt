@@ -9,6 +9,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
@@ -16,8 +17,6 @@ import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.REST;
 import ru.test.gwt.shared.dto.PersonDto;
 import ru.test.gwt.shared.rest.SimpleRest;
-import ru.test.gwt.shared.rpc.SimpleRpc;
-import ru.test.gwt.shared.rpc.SimpleRpcAsync;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
 
 public class Application implements EntryPoint {
 
-    private static final SimpleRpcAsync rpc = GWT.create(SimpleRpc.class);
     private static final SimpleRest rest = GWT.create(SimpleRest.class);
 
     private TextBox firstName;
@@ -52,8 +50,6 @@ public class Application implements EntryPoint {
                 = new SingleSelectionModel<>();
         table.setSelectionModel(selectionModel);
 
-
-     //   mainPanel.setWidgetLeftWidth(table, 0, PCT, 50, PCT);
         //right panel
         final VerticalPanel verticalPanel = new VerticalPanel();
         final HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -65,6 +61,9 @@ public class Application implements EntryPoint {
                 if (!formPanel.isVisible())
                formPanel.setVisible(true);
                 isNewPerson = true;
+                firstName.setText("");
+                lastName.setText("");
+                middleName.setText("");
             }
         });
 
@@ -80,7 +79,7 @@ public class Application implements EntryPoint {
                 isNewPerson = false;
             }
         });
-
+        editButton.setEnabled(false);
         final Button deleteButton = new Button("Удалить", new ClickHandler() {
 
             @Override
@@ -95,13 +94,28 @@ public class Application implements EntryPoint {
                     @Override
                     public void onSuccess(Method method, PersonDto personDto) {
                         Window.alert("Запись удалена");
+                        updateTable(table);
+                        selectionModel.clear();
                     }
                 }).call(rest).delete(String.valueOf(selectionModel.getSelectedObject().getId()));
-                updateTable(table);
+
             }
 
         });
-
+        deleteButton.setEnabled(false);
+        selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+            public void onSelectionChange(SelectionChangeEvent event) {
+                PersonDto selectedPerson = selectionModel.getSelectedObject();
+                if (selectedPerson != null) {
+                    deleteButton.setEnabled(true);
+                    editButton.setEnabled(true);
+                }
+                else {
+                    deleteButton.setEnabled(false);
+                    editButton.setEnabled(false);
+                }
+            }
+        });
         horizontalPanel.add(newButton);
         horizontalPanel.add(editButton);
         horizontalPanel.add(deleteButton);
@@ -151,11 +165,15 @@ public class Application implements EntryPoint {
                    REST.withCallback(new MethodCallback<PersonDto>() {
                        @Override
                        public void onFailure(Method method, Throwable throwable) {
-                           Window.alert("Ошибка");
+                          // Window.alert("Ошибка");
+                           selectionModel.clear();
+                           updateTable(table);
                        }
                        @Override
                        public void onSuccess(Method method, PersonDto personDto) {
+
                            Window.alert("Запись изменена");
+                           selectionModel.clear();
                            updateTable(table);
 
                        }
@@ -169,8 +187,10 @@ public class Application implements EntryPoint {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 formPanel.setVisible(false);
+                selectionModel.clear();
             }
         });
+
         buttonPanel.add(buttonOK);
         buttonPanel.add(buttonCancel);
         buttonPanel.setSpacing(10);
@@ -230,79 +250,10 @@ public class Application implements EntryPoint {
             @Override
             public void onSuccess(Method method, List<PersonDto> dtoList) {
                 list.addAll(dtoList);
+
             }
         }).call(rest).allPerson();
     }
 
-/*
-    private void updateTable(CellTable<PersonDto>  table){
-
-        REST.withCallback(new MethodCallback<List<PersonDto>>() {
-            @Override
-            public void onFailure(Method method, Throwable throwable) {
-                Window.alert("ошибка");
-            }
-            @Override
-            public void onSuccess(Method method, List<PersonDto> dtoList) {
-                table.setRowCount(dtoList.size(), true);
-                table.setRowData(0, dtoList);
-            }
-        }).call(rest).allPerson();
-        table.redraw();
-
-    }
-/*
-        centerPanel.add(new Label("Say hello to:"));
-        inputField = new TextBox();
-        centerPanel.add(inputField);
-        final HorizontalPanel hPanel = new HorizontalPanel();
-        centerPanel.add(hPanel);
-
-        final Button rpcButton = new Button("RPC test", new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                doRpcRequest();
-            }
-        });
-        hPanel.add(rpcButton);
-
-        final Button restButton = new Button("REST test", new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                doRestRequest();
-            }
-        });
-        hPanel.add(restButton);
-    }
-
-    private void doRpcRequest() {
-        rpc.sayHello(inputField.getText(), new AsyncCallback<String>() {
-            @Override
-            public void onFailure(Throwable throwable) {
-                // TODO
-            }
-
-            @Override
-            public void onSuccess(String s) {
-                Window.alert(s);
-            }
-        });
-    }
-
-    private void doRestRequest(){
-        REST.withCallback(new MethodCallback<StringDto>() {
-            @Override
-            public void onFailure(Method method, Throwable throwable) {
-                // TODO
-            }
-
-            @Override
-            public void onSuccess(Method method, StringDto stringDto) {
-                Window.alert(stringDto.getValue());
-            }
-        }).call(rest).sayHello(new StringDto(inputField.getText()));
-    }
-
- */
 
 }
