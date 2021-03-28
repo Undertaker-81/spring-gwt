@@ -1,11 +1,11 @@
-###Test task of Spring and GWT integration with REST backend.
+###T est task of Spring and GWT integration with REST backend.
 
 ```shell
 mvn gwt:run
 ```
 only java 1.8
 
-###Тестовое задание
+### Тестовое задание
 Создать Single Page Application для WEB   
 Основная функция приложения-ведение реестра сотрудников абстрактной организации.
 Страница должна открываться в современных на текущий момент версиях браузеров.  
