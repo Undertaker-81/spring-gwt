@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -33,6 +34,7 @@ import java.util.Properties;
 })
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"ru.test.gwt.server.repository"})
+@PropertySource(value= {"classpath:postgres.properties"})
 public class BeanConfig {
 
 
@@ -43,13 +45,20 @@ public class BeanConfig {
     @Value("classpath:data.sql")
     private Resource testDataSqlScript;
 
+    @Value("${database.url}")
+    private String url;
+    @Value("${database.username}")
+    private String user;
+    @Value("${database.password}")
+    private String password;
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/gtw-test");
-        dataSource.setUsername("user");
-        dataSource.setPassword("password");
+        dataSource.setUrl(url);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
